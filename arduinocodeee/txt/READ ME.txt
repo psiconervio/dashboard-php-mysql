@@ -1,0 +1,234 @@
+------------------------------------------------------------------------------------------------------------------------
+In this project I use the following software:
+- Arduino IDE (V1.8.9).
+- Arduino core for the ESP32 (V1.0.6). You can check the "Arduino core for the ESP32" version in Arduino IDE -> Tools -> Board -> Boards Manager.
+- XAMPP (V3.2.2).
+- PHP (V7.3.0).
+
+I don't know for sure if this project will run well if using a different software version than what I have written above.
+So, my advice, please just try using the software already installed on your computer, whatever version.
+But if an error occurs and it's not because you wrote the wrong code, then try to use software with the same version as the one I used.
+------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------
+If you see that there is a difference between the code shown in the video and the code I shared, 
+it's because after making this video, I found some small errors and I fixed them. SO YOU MUST FOLLOW THE CODE I HAVE SHARE.
+------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------
+In this project I use localhost, so if you are also using localhost, then make sure your ESP32 and your computer are on the same network.
+------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------
+- In the PHP code, please make sure that you have written the correct Database configuration (in the database.php code).
+  private static $dbName = 'REPLACE_WITH_YOUR_DATABASE_NAME'; // Example: private static $dbName = 'myDB';
+  private static $dbHost = 'REPLACE_WITH_YOUR_HOST_NAME_OR_SERVER_NAME'; // Example: private static $dbHost = 'localhost';
+  private static $dbUsername = 'REPLACE_WITH_YOUR_USERNAME'; // Example: private static $dbUsername = 'myUserName';
+  private static $dbUserPassword = 'REPLACE_WITH_YOUR_PASSWORD'; // // Example: private static $dbUserPassword = 'myPassword';
+
+- Make sure that you have written the correct table name for each "$sql" variable in the PHP code.
+------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------
+- In the Arduino code, in the following section:
+  http.begin("http://REPLACE_WITH_YOUR_COMPUTER_IP_ADDRESS/REPLACE_WITH_PROJECT_FOLDER_NAME_IN_htdocs_FOLDER/getdata.php");
+  On some versions of Arduino IDE and "Arduino core for the ESP32", the above line of code may not be supported, resulting in an error. 
+  HOWEVER, FOR THE FIRST TIME, PLEASE TRY USING THE LINE OF CODE ABOVE TO FIND OUT IF THE VERSION OF ARDUINO IDE AND "ARDUINO CORE FOR THE ESP32" THAT HAS BEEN INSTALLED ON YOUR COMPUTER SUPPORTS THE LINE OF CODE ABOVE. 
+  But, if an error occurs in the "http.begin" section of the code above and it's not because of a mistake in writing the code, then use the code below :
+  
+  ###################################### Arduino code "Test Database Access".
+  
+  //________________________________________________________________________________ VOID LOOP()
+  void loop() {
+    // put your main code here, to run repeatedly
+
+    //---------------------------------------- Check WiFi connection status.
+    if(WiFi.status()== WL_CONNECTED) {
+      HTTPClient http;  //--> Declare object of class HTTPClient.
+      WiFiClient client;
+      int httpCode;     //--> Variables for HTTP return code.
+      
+      //........................................ Process to get LEDs data from database to control LEDs.
+      postData = "id=esp32_01";
+      
+      payload = "";
+    
+      digitalWrite(ON_Board_LED, HIGH);
+      Serial.println();
+      Serial.println("---------------getdata.php");
+      // In this project I use local server or localhost with XAMPP application.
+      // So make sure all PHP files are "placed" or "saved" or "run" in the "htdocs" folder.
+      // I suggest that you create a new folder for this project in the "htdocs" folder.
+      // The "htdocs" folder is in the "xampp" installation folder.
+      // The order of the folders I recommend:
+      // xampp\htdocs\your_project_folder_name\phpfile.php
+      //
+      // ESP32 accesses the data bases at this line of code: 
+      // http.begin("http://REPLACE_WITH_YOUR_COMPUTER_IP_ADDRESS/REPLACE_WITH_PROJECT_FOLDER_NAME_IN_htdocs_FOLDER/getdata.php");
+      // REPLACE_WITH_YOUR_COMPUTER_IP_ADDRESS = there are many ways to see the IP address, you can google it. 
+      //                                         But make sure that the IP address used is "IPv4 address".
+      // Example : const char* getdata_URL = "http://192.168.0.0/ESP32_MySQL_Database/Test/getdata.php";
+      const char* getdata_URL = "http://REPLACE_WITH_YOUR_COMPUTER_IP_ADDRESS/REPLACE_WITH_PROJECT_FOLDER_NAME_IN_htdocs_FOLDER/getdata.php";
+      http.begin(client, getdata_URL);  //--> Specify request destination
+      http.addHeader("Content-Type", "application/x-www-form-urlencoded");        //--> Specify content-type header
+     
+      httpCode = http.POST(postData); //--> Send the request
+      payload = http.getString();     //--> Get the response payload
+    
+      Serial.print("httpCode : ");
+      Serial.println(httpCode); //--> Print HTTP return code
+      Serial.print("payload  : ");
+      Serial.println(payload);  //--> Print request response payload
+      
+      http.end();  //--> Close connection
+      Serial.println("---------------");
+      digitalWrite(ON_Board_LED, LOW);
+      //........................................ 
+
+      // Calls the control_LEDs() subroutine.
+      control_LEDs();
+      
+      delay(1000);
+
+      // Calls the get_DHT11_sensor_data() subroutine.
+      get_DHT11_sensor_data();
+    
+      //........................................ The process of sending the DHT11 sensor data to the database.
+      postData = "id=esp32_01";
+      postData += "&temperature=" + String(send_Temp);
+      postData += "&humidity=" + String(send_Humd);
+      postData += "&status_read_sensor_dht11=" + send_Status_Read_DHT11;
+      
+      payload = "";
+    
+      digitalWrite(ON_Board_LED, HIGH);
+      Serial.println();
+      Serial.println("---------------updateDHT11data.php");
+      // Example : const char* updateDHT11data_URL = "http://192.168.0.0/ESP32_MySQL_Database/Test/updateDHT11data.php";
+      const char* updateDHT11data_URL = "http://REPLACE_WITH_YOUR_COMPUTER_IP_ADDRESS/REPLACE_WITH_PROJECT_FOLDER_NAME_IN_htdocs_FOLDER/updateDHT11data.php";
+      http.begin(client, updateDHT11data_URL);  //--> Specify request destination
+      http.addHeader("Content-Type", "application/x-www-form-urlencoded");  //--> Specify content-type header
+     
+      httpCode = http.POST(postData); //--> Send the request
+      payload = http.getString();  //--> Get the response payload
+    
+      Serial.print("httpCode : ");
+      Serial.println(httpCode); //--> Print HTTP return code
+      Serial.print("payload  : ");
+      Serial.println(payload);  //--> Print request response payload
+      
+      http.end();  //Close connection
+      Serial.println("---------------");
+      digitalWrite(ON_Board_LED, LOW);
+      //........................................ 
+      
+      delay(5000);
+    }
+    //---------------------------------------- 
+  }
+  //________________________________________________________________________________ 
+  
+  ######################################
+  
+  ###################################### Arduino code "Final Arduino Code".
+  
+  //________________________________________________________________________________ VOID LOOP()
+  void loop() {
+    // put your main code here, to run repeatedly
+
+    //---------------------------------------- Check WiFi connection status.
+    if(WiFi.status()== WL_CONNECTED) {
+      HTTPClient http;  //--> Declare object of class HTTPClient.
+      WiFiClient client;
+      int httpCode;     //--> Variables for HTTP return code.
+      
+      //........................................ Process to get LEDs data from database to control LEDs.
+      postData = "id=esp32_01";
+      payload = "";
+    
+      digitalWrite(ON_Board_LED, HIGH);
+      Serial.println();
+      Serial.println("---------------getdata.php");
+      // In this project I use local server or localhost with XAMPP application.
+      // So make sure all PHP files are "placed" or "saved" or "run" in the "htdocs" folder.
+      // I suggest that you create a new folder for this project in the "htdocs" folder.
+      // The "htdocs" folder is in the "xampp" installation folder.
+      // The order of the folders I recommend:
+      // xampp\htdocs\your_project_folder_name\phpfile.php
+      //
+      // ESP32 accesses the data bases at this line of code: 
+      // http.begin("http://REPLACE_WITH_YOUR_COMPUTER_IP_ADDRESS/REPLACE_WITH_PROJECT_FOLDER_NAME_IN_htdocs_FOLDER/getdata.php");
+      // REPLACE_WITH_YOUR_COMPUTER_IP_ADDRESS = there are many ways to see the IP address, you can google it. 
+      //                                         But make sure that the IP address used is "IPv4 address".
+      // Example : const char* getdata_URL = "http://192.168.0.0/ESP32_MySQL_Database/Final/getdata.php";
+      const char* getdata_URL = "http://REPLACE_WITH_YOUR_COMPUTER_IP_ADDRESS/REPLACE_WITH_PROJECT_FOLDER_NAME_IN_htdocs_FOLDER/getdata.php";
+      http.begin(client, getdata_URL);  //--> Specify request destination
+      http.addHeader("Content-Type", "application/x-www-form-urlencoded");        //--> Specify content-type header
+     
+      httpCode = http.POST(postData); //--> Send the request
+      payload = http.getString();     //--> Get the response payload
+    
+      Serial.print("httpCode : ");
+      Serial.println(httpCode); //--> Print HTTP return code
+      Serial.print("payload  : ");
+      Serial.println(payload);  //--> Print request response payload
+      
+      http.end();  //--> Close connection
+      Serial.println("---------------");
+      digitalWrite(ON_Board_LED, LOW);
+      //........................................ 
+
+      // Calls the control_LEDs() subroutine.
+      control_LEDs();
+      
+      delay(1000);
+
+      // Calls the get_DHT11_sensor_data() subroutine.
+      get_DHT11_sensor_data();
+    
+      //........................................ The process of sending the DHT11 sensor data and the state of the LEDs to the database.
+      String LED_01_State = "";
+      String LED_02_State = "";
+
+      if (digitalRead(LED_01) == 1) LED_01_State = "ON";
+      if (digitalRead(LED_01) == 0) LED_01_State = "OFF";
+      if (digitalRead(LED_02) == 1) LED_02_State = "ON";
+      if (digitalRead(LED_02) == 0) LED_02_State = "OFF";
+      
+      postData = "id=esp32_01";
+      postData += "&temperature=" + String(send_Temp);
+      postData += "&humidity=" + String(send_Humd);
+      postData += "&status_read_sensor_dht11=" + send_Status_Read_DHT11;
+      postData += "&led_01=" + LED_01_State;
+      postData += "&led_02=" + LED_02_State;
+      payload = "";
+    
+      digitalWrite(ON_Board_LED, HIGH);
+      Serial.println();
+      Serial.println("---------------updateDHT11data_and_recordtable.php");
+      // Example : const char* updateDHT11data_and_recordtable_URL = "http://192.168.0.0/ESP32_MySQL_Database/Final/updateDHT11data_and_recordtable.php";
+      const char* updateDHT11data_and_recordtable_URL = "http://REPLACE_WITH_YOUR_COMPUTER_IP_ADDRESS/REPLACE_WITH_PROJECT_FOLDER_NAME_IN_htdocs_FOLDER/updateDHT11data_and_recordtable.php";
+      http.begin(client, updateDHT11data_and_recordtable_URL);  //--> Specify request destination destination
+      http.addHeader("Content-Type", "application/x-www-form-urlencoded");  //--> Specify content-type header
+     
+      httpCode = http.POST(postData); //--> Send the request
+      payload = http.getString();  //--> Get the response payload
+    
+      Serial.print("httpCode : ");
+      Serial.println(httpCode); //--> Print HTTP return code
+      Serial.print("payload  : ");
+      Serial.println(payload);  //--> Print request response payload
+      
+      http.end();  //Close connection
+      Serial.println("---------------");
+      digitalWrite(ON_Board_LED, LOW);
+      //........................................ 
+      
+      delay(4000);
+    }
+    //---------------------------------------- 
+  }
+  //________________________________________________________________________________ 
+  
+  ######################################
+------------------------------------------------------------------------------------------------------------------------
