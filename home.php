@@ -102,7 +102,7 @@
   
   <body>
     <div class="topnav">
-      <h3>ESP32 WITH MYSQL DATABASE</h3>
+      <h3>ESP32 CON MYSQL DATABASE</h3>
     </div>
     
     <br>
