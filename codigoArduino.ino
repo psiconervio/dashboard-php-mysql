@@ -1,5 +1,4 @@
- //======================================== Including the libraries.
-#include <WiFi.h>
+ #include <WiFi.h>
 #include <HTTPClient.h>
 #include <Arduino_JSON.h>
 #include "DHT.h"
@@ -25,7 +24,7 @@ const char* ssid = "PB02";
 const char* password = "12345678";
 //======================================== 
 
-//======================================== Variables for HTTP POST request data.
+//========== Variables for HTTP POST request data POSDATA ALMACENA LAS VARIABLES PARA EL ENVIO DE DATOS
 String postData = ""; //--> Variables sent for HTTP POST request data.
 String payload = "";  //--> Variable for receiving response from HTTP POST.
 //======================================== 
@@ -36,7 +35,7 @@ int send_Humd;
 String send_Status_Read_DHT11 = "";
 //======================================== 
 
-//________________________________________________________________________________ Subroutine to control LEDs after successfully fetching data from database.
+//______________________________________________ Subroutine to control LEDs after successfully fetching data from database.
 void control_LEDs() {
   Serial.println();
   Serial.println("---------------control_LEDs()");
@@ -68,7 +67,7 @@ void control_LEDs() {
 }
 //________________________________________________________________________________ 
 
-// ________________________________________________________________________________ Subroutine to read and get data from the DHT11 sensor.
+// _____________________________________ Subroutine to read and get data from the DHT11 sensor.
 void get_DHT11_sensor_data() {
   Serial.println();
   Serial.println("-------------get_DHT11_sensor_data()");
@@ -122,7 +121,7 @@ void setup() {
   digitalWrite(LED_01, LOW); //--> Turn off Led LED_01.
   digitalWrite(LED_02, LOW); //--> Turn off Led LED_02.
 
-  //---------------------------------------- Make WiFi on ESP32 in "STA/Station" mode and start connecting to WiFi Router/Hotspot.
+  //------------------------- Make WiFi on ESP32 in "STA/Station" mode and start connecting to WiFi Router/Hotspot.
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
   //---------------------------------------- 
@@ -131,7 +130,7 @@ void setup() {
   Serial.println("-------------");
   Serial.print("Connecting");
 
-  //---------------------------------------- The process of connecting the WiFi on the ESP32 to the WiFi Router/Hotspot.
+  //----------------------------- The process of connecting the WiFi on the ESP32 to the WiFi Router/Hotspot.
   // The process timeout of connecting ESP32 with WiFi Hotspot / WiFi Router is 20 seconds.
   // If within 20 seconds the ESP32 has not been successfully connected to WiFi, the ESP32 will restart.
   // I made this condition because on my ESP32, there are times when it seems like it can't connect to WiFi, so it needs to be restarted to be able to connect to WiFi.
@@ -184,7 +183,7 @@ void loop() {
     HTTPClient http;  //--> Declare object of class HTTPClient.
     int httpCode;     //--> Variables for HTTP return code.
     
-    //........................................ Process to get LEDs data from database to control LEDs.
+    //............................ Process to get LEDs data from database to control LEDs.
     postData = "id=esp32_01";
     
     payload = "";
@@ -228,7 +227,7 @@ void loop() {
     // Calls the get_DHT11_sensor_data() subroutine.
     get_DHT11_sensor_data();
   
-    //........................................ The process of sending the DHT11 sensor data to the database.
+    //............ The process of sending the DHT11 sensor data to the database.
     postData = "id=esp32_01";
     postData += "&temperature=" + String(send_Temp);
     postData += "&humidity=" + String(send_Humd);
@@ -240,7 +239,8 @@ void loop() {
     Serial.println();
     Serial.println("---------------updateDHT11data.php");
     // Example : http.begin("http://192.168.0.0/ESP32_MySQL_Database/Test/updateDHT11data.php");
-    http.begin("http://192.168.101.95/htdocs/dashboard-php-mysql//updateDHT11data.php");  //--> Specify request destination
+    //ACA SE ESPECIFICA EL ENVIO DE DATOS A UPDATEDHT11DATA
+    http.begin("http://192.168.101.95/htdocs/dashboard-php-mysql/updateDHT11data.php");  //--> Specify request destination
     http.addHeader("Content-Type", "application/x-www-form-urlencoded");  //--> Specify content-type header
    
     httpCode = http.POST(postData); //--> Send the request
