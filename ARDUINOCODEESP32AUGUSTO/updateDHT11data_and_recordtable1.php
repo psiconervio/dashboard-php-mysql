@@ -14,7 +14,7 @@
     $led_02 = $_POST['led_02'];
     //........................................
     
-    //........................................ Get the time and date.
+    //...............comentario para el push.
     date_default_timezone_set("America/Argentina/Catamarca"); 
     $tm = date("H:i:s");
     $dt = date("Y-m-d");

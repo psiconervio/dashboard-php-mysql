@@ -25,7 +25,7 @@
       $myObj->ls_time = $row['time'];
       $myObj->ls_date = $dateFormat;
       
-      $myJSON = json_encode($myObj1);
+      $myJSON = json_encode($myObj);
       
       echo $myJSON1;
     }

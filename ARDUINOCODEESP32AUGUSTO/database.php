@@ -11,7 +11,7 @@
 		public function __construct() {
 			die('Init function is not allowed');
 		}
-		 
+		 //comentario para el push
 		public static function connect() {
       // One connection through whole application
       if ( null == self::$cont ) {     
