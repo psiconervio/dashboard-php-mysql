@@ -220,7 +220,7 @@
       
       //------------------------------------------------------------
       function myTimer() {
-        Get_Data("esp32_01");
+        Get_Data("esp32_02");
       }
       //------------------------------------------------------------
       
@@ -247,9 +247,9 @@
                 document.getElementById("ESP32_02_TogLED_01").checked = false;
               }
               if (myObj.LED_02 == "ON") {
-                document.getElementById("ESP32_01_TogLED_02").checked = true;
+                document.getElementById("ESP32_02_TogLED_02").checked = true;
               } else if (myObj.LED_02 == "OFF") {
-                document.getElementById("ESP32_01_TogLED_02").checked = false;
+                document.getElementById("ESP32_02_TogLED_02").checked = false;
               }
             }
           }

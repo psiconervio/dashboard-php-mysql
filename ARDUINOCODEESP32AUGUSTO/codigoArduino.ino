@@ -128,7 +128,7 @@ void setup() {
   Serial.println("-------------");
   Serial.print("Connecting");
 
-  //----------------------------- The process of connecting the WiFi on the ESP32 to the WiFi Router/Hotspot.
+  //The process of connecting the WiFi on the ESP32 to the WiFi Router/Hotspot.
   // The process timeout of connecting ESP32 with WiFi Hotspot / WiFi Router is 20 seconds.
   // If within 20 seconds the ESP32 has not been successfully connected to WiFi, the ESP32 will restart.
   // I made this condition because on my ESP32, there are times when it seems like it can't connect to WiFi, so it needs to be restarted to be able to connect to WiFi.
@@ -201,7 +201,7 @@ void loop() {
     // REPLACE_WITH_YOUR_COMPUTER_IP_ADDRESS = there are many ways to see the IP address, you can google it. 
     //                                         But make sure that the IP address used is "IPv4 address".
     // Example : http.begin("http://192.168.101.95/ESP32_MySQL_Database/Test/getdata.php");
-    http.begin("http://192.168.101.95/htdocs/dashboard-php-mysql/getdata.php");  //--> Specify request destination
+    http.begin("https://esp32dashboard.000webhostapp.com/getdata1.php");  //--> Specify request destination
     http.addHeader("Content-Type", "application/x-www-form-urlencoded");        //--> Specify content-type header
    //ENVIA postData por el metodo Post
     httpCode = http.POST(postData); //--> Send the request
@@ -224,7 +224,7 @@ void loop() {
 
     // Calls the get_DHT11_sensor_data() subroutine.
     get_DHT11_sensor_data();
-  
+   // se cambio el id a id1 y el esp32_01 a esp32_02
     //se procesan los datos para el envio en base de datos /The process of sending the DHT11 sensor data to the database.
     postData = "id1=esp32_02";
     postData += "&temperature=" + String(send_Temp);
@@ -238,9 +238,9 @@ void loop() {
     Serial.println("---------------updateDHT11data.php");
     // Example : http.begin("http://192.168.0.0/ESP32_MySQL_Database/Test/updateDHT11data.php");
     //ACA SE ESPECIFICA EL ENVIO DE DATOS A UPDATEDHT11DATA
-    http.begin("http://192.168.101.95/htdocs/dashboard-php-mysql/updateDHT11data.php");  //--> Specify request destination
+    http.begin("https://esp32dashboard.000webhostapp.com/updateDHT11data1.php");  //--> Specify request destination
     http.addHeader("Content-Type", "application/x-www-form-urlencoded");  //--> Specify content-type header
-   // SE ENVIAN LOS DATOS ACTUALIZADOS Al updateDHT11DATA
+    // SE ENVIAN LOS DATOS ACTUALIZADOS Al updateDHT11DATA
     httpCode = http.POST(postData); //--> Send the request
     payload = http.getString();  //--> Get the response payload
   
