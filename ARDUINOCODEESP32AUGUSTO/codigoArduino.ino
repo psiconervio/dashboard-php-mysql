@@ -1,4 +1,4 @@
- #include <WiFi.h>
+#include <WiFi.h>
 #include <HTTPClient.h>
 #include <Arduino_JSON.h>
 #include "DHT.h"
@@ -12,10 +12,8 @@ DHT dht11_sensor(DHTPIN, DHTTYPE); //--> Initialize DHT sensor.
 
 // Defines the Digital Pin of the "On Board LED".
 #define ON_Board_LED 2 
-
 // Defines GPIO 13 as LED_1.
 #define LED_01 13 
-
 // Defines GPIO 12 as LED_2.
 #define LED_02 12 
 
@@ -183,8 +181,8 @@ void loop() {
     HTTPClient http;  //--> Declare object of class HTTPClient.
     int httpCode;     //--> Variables for HTTP return code.
     
-    //............................ Process to get LEDs data from database to control LEDs.
-    postData = "id=esp32_01";
+    //................. Process to get LEDs data from database to control LEDs.
+    postData = "id1=esp32_02";
     
     payload = "";
   
@@ -205,7 +203,7 @@ void loop() {
     // Example : http.begin("http://192.168.101.95/ESP32_MySQL_Database/Test/getdata.php");
     http.begin("http://192.168.101.95/htdocs/dashboard-php-mysql/getdata.php");  //--> Specify request destination
     http.addHeader("Content-Type", "application/x-www-form-urlencoded");        //--> Specify content-type header
-   //ENVIA posData por el metodo Post
+   //ENVIA postData por el metodo Post
     httpCode = http.POST(postData); //--> Send the request
     payload = http.getString();     //--> Get the response payload
   
@@ -228,7 +226,7 @@ void loop() {
     get_DHT11_sensor_data();
   
     //se procesan los datos para el envio en base de datos /The process of sending the DHT11 sensor data to the database.
-    postData = "id=esp32_01";
+    postData = "id1=esp32_02";
     postData += "&temperature=" + String(send_Temp);
     postData += "&humidity=" + String(send_Humd);
     postData += "&status_read_sensor_dht11=" + send_Status_Read_DHT11;
