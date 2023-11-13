@@ -183,7 +183,7 @@ void loop() {
     HTTPClient http;  //--> Declare object of class HTTPClient.
     int httpCode;     //--> Variables for HTTP return code.
     
-    //........................................ Process to get LEDs data from database to control LEDs.
+    //cambiar a esp32_02........................................ Process to get LEDs data from database to control LEDs.
     postData = "id=esp32_01";
     
     payload = "";
@@ -228,7 +228,7 @@ void loop() {
     // Calls the get_DHT11_sensor_data() subroutine.
     get_DHT11_sensor_data();
   
-    //........................................ The process of sending the DHT11 sensor data to the database.
+    //ACTUALIZAR CON IDE DE ESP32_2............................ The process of sending the DHT11 sensor data to the database.
     postData = "id=esp32_01";
     postData += "&temperature=" + String(send_Temp);
     postData += "&humidity=" + String(send_Humd);

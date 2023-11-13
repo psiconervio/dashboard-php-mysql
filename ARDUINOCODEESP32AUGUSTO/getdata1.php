@@ -3,7 +3,7 @@
   //---------------- Condition to check that POST value is not empty.
   if (!empty($_POST)) {
     // keep track post values
-    $id1 = $_POST['id'];
+    $id1 = $_POST['id1'];
     $myObj = (object)array();
     //........................................ 
     $pdo = Database::connect();
@@ -11,7 +11,7 @@
     // This table is used to store DHT11 sensor data updated by ESP32. 
     // This table is also used to store the state of the LEDs, the state of the LEDs is controlled from the "home.php" page. 
     // To store data, this table is operated with the "UPDATE" command, so this table contains only one row.
-    $sql = 'SELECT * FROM esp32_table_dht11_leds_update1 WHERE id="' . $id . '"';
+    $sql = 'SELECT * FROM esp32_table_dht11_leds_update1 WHERE id="' . $id1 . '"';
     foreach ($pdo->query($sql) as $row) {
       $date = date_create($row['date']);
       $dateFormat = date_format($date,"d-m-Y");
@@ -27,7 +27,7 @@
       
       $myJSON = json_encode($myObj);
       
-      echo $myJSON1;
+      echo $myJSON;
     }
     Database::disconnect();
     //........................................ 

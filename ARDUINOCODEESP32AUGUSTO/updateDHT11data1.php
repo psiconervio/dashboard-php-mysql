@@ -6,7 +6,7 @@
   //---------------------------------------- Condition to check that POST value is not empty.
   if (!empty($_POST)) {
     //........................................ keep track POST values
-    $id1 = $_POST['id1'];
+    $id = $_POST['id'];
     $temperature = $_POST['temperature'];
     $humidity = $_POST['humidity'];
     $status_read_sensor_dht11 = $_POST['status_read_sensor_dht11'];

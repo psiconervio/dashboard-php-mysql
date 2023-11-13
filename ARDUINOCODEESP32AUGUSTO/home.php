@@ -111,7 +111,7 @@
     <div class="content">
       <div class="cards">
         
-        <!-- == MONITORING ======================================================================================== -->
+        <!-- == MONITORING1 ======================================================================================== -->
         <div class="card">
           <div class="card header">
             <h3 style="font-size: 1rem;">MONITORING</h3>
@@ -152,7 +152,7 @@
       </div>
       <div class="cards">
         
-        <!-- == MONITORING ======================================================================================== -->
+        <!-- == MONITORING2======================================================================================== -->
         <div class="card">
           <div class="card header">
             <h3 style="font-size: 1rem;">MONITORING</h3>
@@ -160,12 +160,12 @@
           
           <!-- Displays the humidity and temperature values received from ESP32. *** -->
           <h4 class="temperatureColor"><i class="fas fa-thermometer-half"></i> TEMPERATURE</h4>
-          <p class="temperatureColor"><span class="reading"><span id="ESP32_01_Temp"></span> &deg;C</span></p>
+          <p class="temperatureColor"><span class="reading"><span id="ESP32_02_Temp"></span> &deg;C</span></p>
           <h4 class="humidityColor"><i class="fas fa-tint"></i> HUMIDITY</h4>
-          <p class="humidityColor"><span class="reading"><span id="ESP32_01_Humd"></span> &percnt;</span></p>
+          <p class="humidityColor"><span class="reading"><span id="ESP32_02_Humd"></span> &percnt;</span></p>
           <!-- *********************************************************************** -->
           
-          <p class="statusreadColor"><span>Status Read Sensor DHT11 : </span><span id="ESP32_01_Status_Read_DHT11"></span></p>
+          <p class="statusreadColor"><span>Status Read Sensor DHT11 : </span><span id="ESP32_02_Status_Read_DHT11"></span></p>
         </div>
         <!-- ======================================================================================================= -->
         
@@ -224,7 +224,7 @@
       }
       //------------------------------------------------------------
       
-      //-comentario para hacer un nuevo push-----------------------------------------------------------
+      //-comentario para hacer un nuevo push/terminar de configurar 
       function Get_Data(id1) {
 				if (window.XMLHttpRequest) {
           // code for IE7+, Firefox, Chrome, Opera, Safari
