@@ -3,7 +3,7 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <title>ESP32 CON MYSQL DATABASE</title>
+    <title>V</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="icon" href="data:,">
@@ -102,7 +102,7 @@
   
   <body>
     <div class="topnav">
-      <h3>ESP32 CON MYSQL DATABASE</h3>
+      <h3>ESP32 CON  BASE DE DATOS MYSQL</h3>
     </div>
     
     <br>
@@ -114,24 +114,24 @@
         <!-- == MONITORING1 ======================================================================================== -->
         <div class="card">
           <div class="card header">
-            <h3 style="font-size: 1rem;">MONITORING</h3>
+            <h3 style="font-size: 1rem;">MONITOREO</h3>
           </div>
           
           <!-- Displays the humidity and temperature values received from ESP32. *** -->
-          <h4 class="temperatureColor"><i class="fas fa-thermometer-half"></i> TEMPERATURE</h4>
-          <p class="temperatureColor"><span class="reading"><span id="ESP32_01_Temp1"></span> &deg;C</span></p>
-          <h4 class="humidityColor"><i class="fas fa-tint"></i> HUMIDITY</h4>
-          <p class="humidityColor"><span class="reading"><span id="ESP32_01_Humd1"></span> &percnt;</span></p>
+          <h4 class="temperatureColor"><i class="fas fa-thermometer-half"></i> TEMPERATURA</h4>
+          <p class="temperatureColor"><span class="reading"><span id="ESP32_01_Temp"></span> &deg;C</span></p>
+          <h4 class="humidityColor"><i class="fas fa-tint"></i> HUMEDAD</h4>
+          <p class="humidityColor"><span class="reading"><span id="ESP32_01_Humd"></span> &percnt;</span></p>
           <!-- *********************************************************************** -->
           
-          <p class="statusreadColor"><span>Status Read Sensor DHT11 : </span><span id="ESP32_01_Status_Read_DHT11"></span></p>
+          <p class="statusreadColor"><span>Estado lectura Sensor DHT11 : </span><span id="ESP32_01_Status_Read_DHT11"></span></p>
         </div>
         <!-- ======================================================================================================= -->
         
-        <!-- == CONTROLLING ======================================================================================== -->
+        <!-- == CONTROLLING1 ======================================================================================== -->
         <div class="card">
           <div class="card header">
-            <h3 style="font-size: 1rem;">CONTROLLING</h3>
+            <h3 style="font-size: 1rem;">CONTROL</h3>
           </div>
           
           <!-- Buttons for controlling the LEDs on Slave 2. ************************** -->
@@ -150,40 +150,40 @@
         <!-- ======================================================================================================= -->
         
       </div>
-      <div class="cards">
+            <div class="cards">
         
         <!-- == MONITORING2======================================================================================== -->
         <div class="card">
           <div class="card header">
-            <h3 style="font-size: 1rem;">MONITORING</h3>
+            <h3 style="font-size: 1rem;">MONITOREO</h3>
           </div>
           
           <!-- Displays the humidity and temperature values received from ESP32. *** -->
-          <h4 class="temperatureColor"><i class="fas fa-thermometer-half"></i> TEMPERATURE</h4>
+          <h4 class="temperatureColor"><i class="fas fa-thermometer-half"></i> Temperatura</h4>
           <p class="temperatureColor"><span class="reading"><span id="ESP32_02_Temp"></span> &deg;C</span></p>
-          <h4 class="humidityColor"><i class="fas fa-tint"></i> HUMIDITY</h4>
+          <h4 class="humidityColor"><i class="fas fa-tint"></i> HUMEDAD</h4>
           <p class="humidityColor"><span class="reading"><span id="ESP32_02_Humd"></span> &percnt;</span></p>
           <!-- *********************************************************************** -->
           
-          <p class="statusreadColor"><span>Status Read Sensor DHT11 : </span><span id="ESP32_02_Status_Read_DHT11"></span></p>
+          <p class="statusreadColor"><span>Estado Read Sensor DHT11 : </span><span id="ESP32_02_Status_Read_DHT11"></span></p>
         </div>
         <!-- ======================================================================================================= -->
         
-        <!-- == CONTROLLING ======================================================================================== -->
+        <!-- == CONTROLLING2 ======================================================================================== -->
         <div class="card">
           <div class="card header">
-            <h3 style="font-size: 1rem;">CONTROLLING</h3>
+            <h3 style="font-size: 1rem;">CONTROL</h3>
           </div>
           
           <!-- Buttons for controlling the LEDs on Slave 2. ************************** -->
           <h4 class="LEDColor"><i class="fas fa-lightbulb"></i> LED 1</h4>
           <label class="switch">
-            <input type="checkbox" id="ESP32_01_TogLED_01" onclick="GetTogBtnLEDState('ESP32_01_TogLED_01')">
+            <input type="checkbox" id="ESP32_02_TogLED_01" onclick="GetTogBtnLEDState('ESP32_02_TogLED_01')">
             <div class="sliderTS"></div>
           </label>
           <h4 class="LEDColor"><i class="fas fa-lightbulb"></i> LED 2</h4>
           <label class="switch">
-            <input type="checkbox" id="ESP32_01_TogLED_02" onclick="GetTogBtnLEDState('ESP32_01_TogLED_02')">
+            <input type="checkbox" id="ESP32_02_TogLED_02" onclick="GetTogBtnLEDState('ESP32_02_TogLED_02')">
             <div class="sliderTS"></div>
           </label>
           <!-- *********************************************************************** -->
@@ -205,27 +205,27 @@
       </div>
     </div>
     <!-- ___________________________________________________________________________________________________________________________________ -->
-    <!--  /*modificando script para*/ --> 
+    
     <script>
       //------------------------------------------------------------
-      document.getElementById("ESP32_02_Temp").innerHTML = "NN"; 
-      document.getElementById("ESP32_02_Humd").innerHTML = "NN";
-      document.getElementById("ESP32_02_Status_Read_DHT11").innerHTML = "NN";
-      document.getElementById("ESP32_02_LTRD").innerHTML = "NN";
+      document.getElementById("ESP32_01_Temp").innerHTML = "NN"; 
+      document.getElementById("ESP32_01_Humd").innerHTML = "NN";
+      document.getElementById("ESP32_01_Status_Read_DHT11").innerHTML = "NN";
+      document.getElementById("ESP32_01_LTRD").innerHTML = "NN";
       //------------------------------------------------------------
       
-      Get_Data("esp32_02");
+      Get_Data("esp32_01");
       
       setInterval(myTimer, 5000);
       
       //------------------------------------------------------------
       function myTimer() {
-        Get_Data("esp32_02");
+        Get_Data("esp32_01");
       }
       //------------------------------------------------------------
       
-      //-comentario para hacer un nuevo push/terminar de configurar 
-      function Get_Data(id1) {
+      //------------------------------------------------------------
+      function Get_Data(id) {
 				if (window.XMLHttpRequest) {
           // code for IE7+, Firefox, Chrome, Opera, Safari
           xmlhttp = new XMLHttpRequest();
@@ -236,25 +236,25 @@
         xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
             const myObj = JSON.parse(this.responseText);
-            if (myObj.id == "esp32_02") {
-              document.getElementById("ESP32_02_Temp").innerHTML = myObj.temperature;
-              document.getElementById("ESP32_02_Humd").innerHTML = myObj.humidity;
-              document.getElementById("ESP32_02_Status_Read_DHT11").innerHTML = myObj.status_read_sensor_dht11;
-              document.getElementById("ESP32_02_LTRD").innerHTML = "Time : " + myObj.ls_time + " | Date : " + myObj.ls_date + " (dd-mm-yyyy)";
+            if (myObj.id == "esp32_01") {
+              document.getElementById("ESP32_01_Temp").innerHTML = myObj.temperature;
+              document.getElementById("ESP32_01_Humd").innerHTML = myObj.humidity;
+              document.getElementById("ESP32_01_Status_Read_DHT11").innerHTML = myObj.status_read_sensor_dht11;
+              document.getElementById("ESP32_01_LTRD").innerHTML = "Time : " + myObj.ls_time + " | Date : " + myObj.ls_date + " (dd-mm-yyyy)";
               if (myObj.LED_01 == "ON") {
-                document.getElementById("ESP32_02_TogLED_01").checked = true;
+                document.getElementById("ESP32_01_TogLED_01").checked = true;
               } else if (myObj.LED_01 == "OFF") {
-                document.getElementById("ESP32_02_TogLED_01").checked = false;
+                document.getElementById("ESP32_01_TogLED_01").checked = false;
               }
               if (myObj.LED_02 == "ON") {
-                document.getElementById("ESP32_02_TogLED_02").checked = true;
+                document.getElementById("ESP32_01_TogLED_02").checked = true;
               } else if (myObj.LED_02 == "OFF") {
-                document.getElementById("ESP32_02_TogLED_02").checked = false;
+                document.getElementById("ESP32_01_TogLED_02").checked = false;
               }
             }
           }
         };
-        xmlhttp.open("POST","getdata1.php",true);
+        xmlhttp.open("POST","getdata.php",true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.send("id="+id);
 			}
@@ -262,14 +262,14 @@
       
       //------------------------------------------------------------
       function GetTogBtnLEDState(togbtnid) {
-        if (togbtnid == "ESP32_02_TogLED_01") {
+        if (togbtnid == "ESP32_01_TogLED_01") {
           var togbtnchecked = document.getElementById(togbtnid).checked;
           var togbtncheckedsend = "";
           if (togbtnchecked == true) togbtncheckedsend = "ON";
           if (togbtnchecked == false) togbtncheckedsend = "OFF";
-          Update_LEDs("esp32_02","LED_01",togbtncheckedsend);
+          Update_LEDs("esp32_01","LED_01",togbtncheckedsend);
         }
-        if (togbtnid == "ESP32_02_TogLED_02") {
+        if (togbtnid == "ESP32_01_TogLED_02") {
           var togbtnchecked = document.getElementById(togbtnid).checked;
           var togbtncheckedsend = "";
           if (togbtnchecked == true) togbtncheckedsend = "ON";
@@ -297,7 +297,99 @@
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.send("id="+id+"&lednum="+lednum+"&ledstate="+ledstate);
 			}
+      /*SCRIPT PARA EL 2DO ESP32 -----------------------------------------------------------
+    
       //------------------------------------------------------------
+      document.getElementById("ESP32_02_Temp").innerHTML = "NN"; 
+      document.getElementById("ESP32_02_Humd").innerHTML = "NN";
+      document.getElementById("ESP32_02_Status_Read_DHT11").innerHTML = "NN";
+      document.getElementById("ESP32_02_LTRD").innerHTML = "NN";
+      //------------------------------------------------------------
+      
+      Get_Dataa("esp32_02");
+      
+      setInterval(myTimer, 5000);
+      
+      //------------------------------------------------------------
+      function myTimer() {
+        Get_Dataa("esp32_02");
+      }
+      //------------------------------------------------------------
+      
+      //-comentario para hacer un nuevo push/terminar de configurar 
+      function Get_Dataa(id) {
+				if (window.XMLHttpRequest) {
+          // code for IE7+, Firefox, Chrome, Opera, Safari
+          xmlhttp = new XMLHttpRequest();
+        } else {
+          // code for IE6, IE5
+          xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            const myObj1 = JSON.parse(this.responseText);
+            if (myObj1.id == "esp32_02") {
+              document.getElementById("ESP32_02_Temp").innerHTML = myObj1.temperature;
+              document.getElementById("ESP32_02_Humd").innerHTML = myObj1.humidity;
+              document.getElementById("ESP32_02_Status_Read_DHT11").innerHTML = myObj1.status_read_sensor_dht11;
+              document.getElementById("ESP32_02_LTRD").innerHTML = "Time : " + myObj1.ls_time + " | Date : " + myObj1.ls_date + " (dd-mm-yyyy)";
+              if (myObj1.LED_01 == "ON") {
+                document.getElementById("ESP32_02_TogLED_01").checked = true;
+              } else if (myObj1.LED_01 == "OFF") {
+                document.getElementById("ESP32_02_TogLED_01").checked = false;
+              }
+              if (myObj1.LED_02 == "ON") {
+                document.getElementById("ESP32_02_TogLED_02").checked = true;
+              } else if (myObj1.LED_02 == "OFF") {
+                document.getElementById("ESP32_02_TogLED_02").checked = false;
+              }
+            }
+          }
+        };
+        xmlhttp.open("POST","getdata.php",true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send("id="+id);
+			}
+      //------------------------------------------------------------
+      
+      //------------------------------------------------------------
+      function GetTogBtnLEDStatee(togbtnid) {
+        if (togbtnid == "ESP32_02_TogLED_01") {
+          var togbtnchecked = document.getElementById(togbtnid).checked;
+          var togbtncheckedsend = "";
+          if (togbtnchecked == true) togbtncheckedsend = "ON";
+          if (togbtnchecked == false) togbtncheckedsend = "OFF";
+          Update_LEDs("esp32_02","LED_01",togbtncheckedsend);
+        }
+        if (togbtnid == "ESP32_02_TogLED_02") {
+          var togbtnchecked = document.getElementById(togbtnid).checked;
+          var togbtncheckedsend = "";
+          if (togbtnchecked == true) togbtncheckedsend = "ON";
+          if (togbtnchecked == false) togbtncheckedsend = "OFF";
+          Update_LEDs("esp32_01","LED_02",togbtncheckedsend);
+        }
+      }
+      //------------------------------------------------------------
+      
+      //------------------------------------------------------------
+      function Update_LEDss(id,lednum,ledstate) {
+				if (window.XMLHttpRequest) {
+          // code for IE7+, Firefox, Chrome, Opera, Safari
+          xmlhttp = new XMLHttpRequest();
+        } else {
+          // code for IE6, IE5
+          xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            //document.getElementById("demo").innerHTML = this.responseText;
+          }
+        }
+        xmlhttp.open("POST","updateLEDs.php",true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send("id="+id+"&lednum="+lednum+"&ledstate="+ledstate);
+			}
+      //------------------------------------------------------------*/
     </script>
   </body>
 </html>
